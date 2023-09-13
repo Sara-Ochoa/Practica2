@@ -181,9 +181,27 @@ void Problema8(){
     char texto[10];
     char numeros[10];
     char ele;
+    int i, j,k=0;
     cout<<"Ingrese la cadena: "<<endl;
     cin>>original;
-    for(int i=0; i<CalcularLongitud(original); i++){
+
+    while(i<sizeof(original)-1){
+        ele=original[i];
+        if(ele>=49 && ele<=57){
+            numeros[j]=ele;
+            j++;
+        }
+        else{
+            texto[k]=ele;
+            k++;
+        }
+        i++;
+    }
+
+    cout<<"Original: "<<original<<"."<<endl;
+    cout<<"Texto: "<<texto<<". Numero: "<<numeros<<"."<<endl;
+    /*
+    for(int i=0; i<sizeof(original); i++){
         ele = original[i];
         if((ele>=65 && ele<=90) || (ele>=97 && ele<=122)){
             texto[i]=ele;
@@ -193,7 +211,7 @@ void Problema8(){
         }
     }
     cout<<"Original:"<<original<<endl;
-    cout<<"Texto:"<<texto<<"."<<"Numero:"<<numeros<<endl;
+    cout<<"Texto:"<<texto<<"."<<"Numero:"<<numeros<<endl;*/
 
 }
 
