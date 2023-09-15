@@ -1,7 +1,9 @@
 #include <iostream>
 #include <time.h>
+#include <map>
 
 using namespace std;
+map<char, int> romanos;
 
 int CalcularLongitud(char cadena[]);
 void Problema2();
@@ -11,6 +13,9 @@ void Problema5(int num, char *arreglo);
 void Problema6();
 void Problema7();
 void Problema8();
+void Problema9();
+void Problema10();
+int Rom_Ara(char num[]);
 
 int main()
 {
@@ -34,7 +39,8 @@ int main()
 
     //Problema7();
 
-    Problema8();
+    //Problema8();
+    Problema10();
     return 0;
 }
 
@@ -97,16 +103,18 @@ bool Problema3(){
 
 void Problema4(){
     //Dejarlo solo como función y pasarle la cadena como parámetro
-    char cadena[5];//Esto va en el main
+    char cadena[10];//Esto va en el main
     int nuevo=0;
+    int num=0;
     cout<<"Ingrese la cadena: "<<endl;//Esto va en el main
     cin>>cadena;//Esto va en el main
 
     for(int i=0; cadena[i]!='\0'; i++){
         nuevo = cadena[i] - 48;
-        cout<<nuevo;
+        num = num * 10;
+        num += nuevo;
     }
-
+    cout<<num<<endl;
 }
 
 void Problema5(int num, char *arreglo){
@@ -200,22 +208,39 @@ void Problema8(){
 
     cout<<"Original: "<<original<<"."<<endl;
     cout<<"Texto: "<<texto<<". Numero: "<<numeros<<"."<<endl;
-    /*
-    for(int i=0; i<sizeof(original); i++){
-        ele = original[i];
-        if((ele>=65 && ele<=90) || (ele>=97 && ele<=122)){
-            texto[i]=ele;
-        }
-        else{//DUDA:Necesariamente no tiene que ser numero los demas caracteres, entonces hay que hacer 2 condiciones
-            numeros[i-1]=ele;
-        }
-    }
-    cout<<"Original:"<<original<<endl;
-    cout<<"Texto:"<<texto<<"."<<"Numero:"<<numeros<<endl;*/
 
 }
 
+void Problema10(){
+    romanos['I']=1;
+    romanos['V']=5;
+    romanos['X']=10;
+    romanos['L']=50;
+    romanos['C']=100;
+    romanos['D']=500;
+    romanos['M']=1000;
+    char num[10];
 
+    cout<<"Ingrese los numeros romanos (M-D-C-L-X-V-I): "<<endl;
+    cin>>num;
+    cout<<"El numero ingresado fue: "<<num<<" Que corresponde a: "<<Rom_Ara(num)<<endl;
+}
+
+int Rom_Ara(char num[]){
+    int resFinal=0;
+    int tamano= sizeof(num);
+
+    for(int i=0; i<tamano; i++){
+        if(i+1<tamano && romanos[num[i]] < romanos[num[i+1]]){ //IV
+            resFinal += (romanos[num[i+1]] - romanos[num[i]]); //5-1 = 4
+            i++;
+        }
+        else{
+            resFinal +=romanos[num[i]];
+        }
+    }
+    return resFinal;
+}
 
 
 
