@@ -16,6 +16,7 @@ void Problema8();
 void Problema9();
 void Problema10();
 int Rom_Ara(char num[]);
+int Potencia(int base, int exp);
 
 int main()
 {
@@ -25,8 +26,8 @@ int main()
     //cout<<Problema3();
 
     //Problema4();
-
-    /*//Aqui comienza el problema 5
+/*
+    //Aqui comienza el problema 5
     int num=0;
     cout<<"Ingrese el numero: "<<endl;
     cin>>num;
@@ -40,7 +41,8 @@ int main()
     //Problema7();
 
     //Problema8();
-    Problema10();
+    Problema9();
+    //Problema10();
     return 0;
 }
 
@@ -210,6 +212,42 @@ void Problema8(){
     cout<<"Texto: "<<texto<<". Numero: "<<numeros<<"."<<endl;
 
 }
+
+void Problema9(){
+    char cadena[10];//Esto va en el main
+    int nuevo=0;
+    int num=0;
+    int numero=0;
+    int suma=0;
+    cout<<"Ingrese la cadena: "<<endl;//Esto va en el main
+    cin>>cadena;//Esto va en el main
+    cout<<"Ingrese el numero para las separaciones: "<<endl;
+    cin>>numero;
+
+    for(int i=0; cadena[i]!='\0'; i++){
+        nuevo = cadena[i] - 48;
+        num = num * 10;
+        num += nuevo;
+    }
+
+    int divisor=Potencia(10, numero);
+
+    while(num>0){
+        suma += num% divisor;
+        num = num/divisor;
+    }
+    cout<<"Orignal: "<<cadena<<". Suma: "<<suma<<"."<<endl;
+}
+
+
+int Potencia(int base, int exp){
+    int x=1;
+    for(int i=0; i<exp; i++){
+        x *= base;
+    }
+    return x;
+}
+
 
 void Problema10(){
     romanos['I']=1;
