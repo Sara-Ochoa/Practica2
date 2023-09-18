@@ -6,6 +6,7 @@ using namespace std;
 map<char, int> romanos;
 
 int CalcularLongitud(char cadena[]);
+void Problema1();
 void Problema2();
 bool Problema3();
 void Problema4();
@@ -20,6 +21,7 @@ int Potencia(int base, int exp);
 
 int main()
 {
+    Problema1();
     //srand(time(NULL));
     //Problema2();
 
@@ -41,7 +43,7 @@ int main()
     //Problema7();
 
     //Problema8();
-    Problema9();
+    //Problema9();
     //Problema10();
     return 0;
 }
@@ -56,6 +58,25 @@ int CalcularLongitud(char cadena[]){
     return len;
 
 }
+
+void Problema1(){
+    int cantidad=0;
+    int billetesModenas[10]={50000,20000,10000,5000,2000,1000,500,200,100,50};
+    int num=0;
+    cout<<"Ingrese la cantidad: ";
+    cin>>cantidad;
+    for (int i=0;i<10; i++)
+    {
+        num=cantidad/billetesModenas[i];
+        cantidad %=billetesModenas[i];
+        cout<<billetesModenas[i]<<": "<<num<<endl;
+    }
+
+    cout<<"Faltante: "<<cantidad<<endl;
+}
+
+
+
 
 void Problema2(){
     char arreglo[5];//El arreglo debe ser de 200
@@ -284,6 +305,66 @@ int Rom_Ara(char num[]){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////7
+//COGIDOS EN ARDUINO
+
+
+
+
+
+
+//PUNTO 6
+/*
+// C++ code
+//
+char cadena[20];
+char nuevaCadena[20];
+int longitud =0;
+char cr;
+
+void setup()
+{
+  Serial.begin(9600);//Inicialización del puerto serail
+  Serial.println("Ingrese la cadena: ");
+  longitud = sizeof(cadena) / sizeof(char);
+}
+
+void loop()
+{
+  if(Serial.available()>0){
+    cr = miArray[3];
+    for(int i=0; i<longitud; i++){
+        char caracter= cadena[i];
+        if((caracter>=65 && caracter<=90) || (caracter>=97 && caracter<=122)){
+            if(caracter>=97){
+                caracter-=32;
+                nuevaCadena[i] = caracter;
+            }
+            else{
+                nuevaCadena[i] = caracter;
+            }
+        }
+        else{
+            nuevaCadena[i] = caracter;
+        }
+    }
+  }
+}
+*/
 
 
 
