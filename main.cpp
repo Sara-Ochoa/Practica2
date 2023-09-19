@@ -21,9 +21,9 @@ int Potencia(int base, int exp);
 
 int main()
 {
-    Problema1();
-    //srand(time(NULL));
-    //Problema2();
+    //Problema1();
+    srand(time(NULL));
+    Problema2();
 
     //cout<<Problema3();
 
@@ -61,7 +61,7 @@ int CalcularLongitud(char cadena[]){
 
 void Problema1(){
     int cantidad=0;
-    int billetesModenas[10]={50000,20000,10000,5000,2000,1000,500,200,100,50};
+    int billetesModenas[]={50000,20000,10000,5000,2000,1000,500,200,100,50};
     int num=0;
     cout<<"Ingrese la cantidad: ";
     cin>>cantidad;
@@ -79,16 +79,15 @@ void Problema1(){
 
 
 void Problema2(){
-    char arreglo[5];//El arreglo debe ser de 200
+    char arreglo[200];//El arreglo debe ser de 200
     char cr;
     char letras;
 
-    for(int i=0; i<5; i++){
+    for(int i=0; i<200; i++){
         letras = 65 +rand()%(91-65);
         arreglo[i] = letras;
     }
     cout<<arreglo<<endl;
-    //Aquí agregar la segunda parte, donde cuente cuantas veces hay una letra
     for(int i=0; i<sizeof(arreglo); i++){
         int cont=0;
         cr=arreglo[i];
@@ -302,25 +301,57 @@ int Rom_Ara(char num[]){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////////7
-//COGIDOS EN ARDUINO
+//COGIDOS EN ARDUINO (Ninguno funciona)
+
+
+//PUNTO 1
+/*
+//
+    int billetesModenas[]={50000,20000,10000,5000,2000,1000,500,200,100,50};
+int cantidad=0;
+char caracteres[10];
+int num=0;
+int nuevo=0;
+
+
+void setup()
+{
+  Serial.begin(9600);
+  Serial.println("Ingrese la cantidad: ");
+}
+
+void loop()
+{
+  if(Serial.available()>0){
+    while(Serial.available()){
+        Serial.readBytesUntil('\n', caracteres, 10);
+    }
+    for(int i=0; caracteres[i]!='\0'; i++){
+        nuevo = caracteres[i] - 48;
+        cantidad = cantidad * 10;
+        cantidad += nuevo;
+    }
+    for (int i=0;i<10; i++)
+    {
+        num=cantidad/billetesModenas[i];
+        cantidad %=billetesModenas[i];
+        Serial.println(billetesModenas[i]+": "+num);
+    }
+
+    Serial.println("Faltante: "+cantidad);
+  }
+}
+*/
+
+
+
+
+
+
+
+
+
 
 
 
