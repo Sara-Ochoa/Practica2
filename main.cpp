@@ -22,12 +22,12 @@ int Potencia(int base, int exp);
 int main()
 {
     //Problema1();
-    srand(time(NULL));
-    Problema2();
+    //srand(time(NULL));
+    //Problema2();
 
     //cout<<Problema3();
 
-    //Problema4();
+    Problema4();
 /*
     //Aqui comienza el problema 5
     int num=0;
@@ -308,8 +308,8 @@ int Rom_Ara(char num[]){
 //PUNTO 1
 /*
 //
-    int billetesModenas[]={50000,20000,10000,5000,2000,1000,500,200,100,50};
-int cantidad=0;
+long billetesModenas[]={50000,20000,10000,5000,2000,1000,500,200,100,50};
+long cantidad=0;
 char caracteres[10];
 int num=0;
 int nuevo=0;
@@ -327,35 +327,29 @@ void loop()
     while(Serial.available()){
         Serial.readBytesUntil('\n', caracteres, 10);
     }
+    Serial.println(caracteres);
+
     for(int i=0; caracteres[i]!='\0'; i++){
         nuevo = caracteres[i] - 48;
         cantidad = cantidad * 10;
         cantidad += nuevo;
     }
+
     for (int i=0;i<10; i++)
     {
         num=cantidad/billetesModenas[i];
         cantidad %=billetesModenas[i];
-        Serial.println(billetesModenas[i]+": "+num);
+        Serial.print(billetesModenas[i]);
+        Serial.print(": ");
+        Serial.print(num);
+        Serial.println();
     }
 
-    Serial.println("Faltante: "+cantidad);
+    Serial.print("Faltante: ");
+    Serial.print(cantidad);
   }
 }
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //PUNTO 6
