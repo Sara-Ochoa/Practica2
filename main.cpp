@@ -5,11 +5,12 @@
 using namespace std;
 map<char, int> romanos;
 
+void MenuPrincipal();
 int CalcularLongitud(char cadena[]);
 void Problema1();
 void Problema2();
 bool Problema3();
-void Problema4();
+int Problema4();
 void Problema5(int num, char *arreglo);
 void Problema6();
 void Problema7();
@@ -21,31 +22,78 @@ int Potencia(int base, int exp);
 
 int main()
 {
-    //Problema1();
-    //srand(time(NULL));
-    //Problema2();
+    int opcion=1;
+    while(opcion!=0){
+        MenuPrincipal();
+        cin>>opcion;
+        switch (opcion) {
+        case 1:
+            Problema1();
+            break;
+        case 2:
+            srand(time(NULL));
+            Problema2();
+            //Hay que arreglar queno se repitan las letras ya impresas
+            break;
+        case 3:
+        {
+            int valor = Problema3();
+            if(valor==1){
+                cout<<"Las dos cadenas son iguales"<<endl;
+            }
+            else{
+                cout<<"Las dos cadenas son diferentes"<<endl;
+            }
+            break;
+        }
+        case 4:
+        {
+            int numero=Problema4();
+            cout<<"Ahora vamos a multiplicar ese numero por dos."<<endl;
+            cout<<"El resultado es: "<<numero*2<<endl;
 
-    //cout<<Problema3();
-
-    Problema4();
-/*
-    //Aqui comienza el problema 5
-    int num=0;
-    cout<<"Ingrese el numero: "<<endl;
-    cin>>num;
-    char arreglo[5];
-    Problema5(num, arreglo);//Hay que ponerle un & que significa la dirección de eso
-    cout<<arreglo;
-    //Aqui termina el problema 5*/
-
-    //Problema6();
-
-    //Problema7();
-
-    //Problema8();
-    //Problema9();
-    //Problema10();
+            break;
+        }
+        case 5:
+        {
+            int num=0;
+            cout<<"Ingrese el numero: "<<endl;
+            cin>>num;
+            char arreglo[5];
+            Problema5(num, arreglo);//Hay que ponerle un & que significa la dirección de eso
+            cout<<arreglo;
+            break;
+        }
+        case 6:
+            Problema6();
+            break;
+        case 7:
+            Problema7();
+            break;
+        case 8:
+            Problema8();
+            break;
+        case 9:
+            Problema9();
+            break;
+        case 10:
+            Problema10();
+            break;
+        default:
+            if(opcion!=0)
+                cout<<"La opcion no valida"<<endl;
+            break;
+        }
+    }
     return 0;
+}
+
+void MenuPrincipal(){
+    cout<<endl;
+    cout<<"*********** Menu practica 2 ***********"<<endl;
+    cout<<endl;
+    cout<<"Seleccione una opcion del 1 al 10"<<endl;
+    cout<<endl;
 }
 
 
@@ -88,10 +136,10 @@ void Problema2(){
         arreglo[i] = letras;
     }
     cout<<arreglo<<endl;
-    for(int i=0; i<sizeof(arreglo); i++){
+    for(int i=0; i<CalcularLongitud(arreglo); i++){
         int cont=0;
         cr=arreglo[i];
-        for(int j=0; j<sizeof(arreglo); j++){
+        for(int j=0; j<CalcularLongitud(arreglo); j++){
             if(arreglo[j]==cr){
                 cont +=1;
             }
@@ -102,12 +150,12 @@ void Problema2(){
 }
 
 bool Problema3(){
-    char cadena1[10];//Hay que pasarlo al main
-    char cadena2[10];//Hay que pasarlo al main
-    cout<<"Ingrese la primer cadena: "<<endl;//Hay que pasarlo al main
-    cin>>cadena1;//Hay que pasarlo al main
-    cout<<"Ingrese la segunda cadena: "<<endl;//Hay que pasarlo al main
-    cin>>cadena2;//Hay que pasarlo al main
+    char cadena1[10];
+    char cadena2[10];
+    cout<<"Ingrese la primer cadena: "<<endl;
+    cin>>cadena1;
+    cout<<"Ingrese la segunda cadena: "<<endl;
+    cin>>cadena2;
     if(CalcularLongitud(cadena1) == CalcularLongitud(cadena2)){
         for(int i=0; i<CalcularLongitud(cadena1); i++){
             if(cadena1[i] == cadena2[i]){
@@ -123,20 +171,19 @@ bool Problema3(){
     }
 }
 
-void Problema4(){
-    //Dejarlo solo como función y pasarle la cadena como parámetro
-    char cadena[10];//Esto va en el main
+int Problema4(){
+    char cadena[10];
     int nuevo=0;
     int num=0;
-    cout<<"Ingrese la cadena: "<<endl;//Esto va en el main
-    cin>>cadena;//Esto va en el main
+    cout<<"Ingrese la cadena: "<<endl;
+    cin>>cadena;
 
     for(int i=0; cadena[i]!='\0'; i++){
         nuevo = cadena[i] - 48;
         num = num * 10;
         num += nuevo;
     }
-    cout<<num<<endl;
+    return num;
 }
 
 void Problema5(int num, char *arreglo){
@@ -302,7 +349,7 @@ int Rom_Ara(char num[]){
 
 
 ///////////////////////////////////////////////////////////////////////////////////////7
-//COGIDOS EN ARDUINO (Ninguno funciona)
+//COGIDOS EN ARDUINO
 
 
 //PUNTO 1
@@ -354,40 +401,42 @@ void loop()
 
 //PUNTO 6
 /*
-// C++ code
-//
 char cadena[20];
 char nuevaCadena[20];
-int longitud =0;
-char cr;
 
 void setup()
 {
-  Serial.begin(9600);//Inicialización del puerto serail
-  Serial.println("Ingrese la cadena: ");
-  longitud = sizeof(cadena) / sizeof(char);
+    Serial.begin(9600);
+    Serial.println("Ingrese la cadena: ");
 }
 
 void loop()
 {
-  if(Serial.available()>0){
-    cr = miArray[3];
-    for(int i=0; i<longitud; i++){
-        char caracter= cadena[i];
-        if((caracter>=65 && caracter<=90) || (caracter>=97 && caracter<=122)){
-            if(caracter>=97){
-                caracter-=32;
-                nuevaCadena[i] = caracter;
+    if(Serial.available()>0){
+        while(Serial.available()){
+            Serial.readBytesUntil('\n', cadena, 20);
+        }
+        for(int i=0; i<sizeof(cadena); i++){
+            char caracter= cadena[i];
+            if((caracter>=65 && caracter<=90) || (caracter>=97 && caracter<=122)){
+                if(caracter>=97){
+                    caracter-=32;
+                    nuevaCadena[i] = caracter;
+                }
+                else{
+                    nuevaCadena[i] = caracter;
+                }
             }
             else{
                 nuevaCadena[i] = caracter;
             }
         }
-        else{
-            nuevaCadena[i] = caracter;
-        }
+        Serial.print("Original: ");
+        Serial.print(cadena);
+        Serial.print(". En mayuscula: ");
+        Serial.print(nuevaCadena);
+        Serial.println();
     }
-  }
 }
 */
 
