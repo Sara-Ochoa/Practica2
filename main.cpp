@@ -33,7 +33,7 @@ int main()
         case 2:
             srand(time(NULL));
             Problema2();
-            //Hay que arreglar queno se repitan las letras ya impresas
+            //Hay que arreglar que no se repitan las letras ya impresas
             break;
         case 3:
         {
@@ -281,13 +281,13 @@ void Problema8(){
 }
 
 void Problema9(){
-    char cadena[10];//Esto va en el main
+    char cadena[10];
     int nuevo=0;
     int num=0;
     int numero=0;
     int suma=0;
-    cout<<"Ingrese la cadena: "<<endl;//Esto va en el main
-    cin>>cadena;//Esto va en el main
+    cout<<"Ingrese la cadena: "<<endl;
+    cin>>cadena;
     cout<<"Ingrese el numero para las separaciones: "<<endl;
     cin>>numero;
 
@@ -354,7 +354,6 @@ int Rom_Ara(char num[]){
 
 //PUNTO 1
 /*
-//
 long billetesModenas[]={50000,20000,10000,5000,2000,1000,500,200,100,50};
 long cantidad=0;
 char caracteres[10];
@@ -413,6 +412,9 @@ void setup()
 void loop()
 {
     if(Serial.available()>0){
+        for(int i=0; i<sizeof(cadena); i++){
+        cadena[i]='\0';
+        }
         while(Serial.available()){
             Serial.readBytesUntil('\n', cadena, 20);
         }
@@ -440,8 +442,74 @@ void loop()
 }
 */
 
+//PUNTO 10
+/*
+int valor[10];
+char num[10];
+int tamano=sizeof(num);
+
+void setup()
+{
+  Serial.begin(9600);
+  Serial.println("Ingrese los numeros romanos (M-D-C-L-X-V-I): ");
+}
+
+void loop()
+{
+  if(Serial.available()>0){
+    int resFinal=0;
+    while(Serial.available()){
+        Serial.readBytesUntil('\n', num, 10);
+    }
+
+    for(int i=0; i<tamano; i++){
+      if(num[i]=='I'){
+        valor[i]=1;
+      }
+      if(num[i]=='V'){
+        valor[i]=5;
+      }
+      if(num[i]=='X'){
+        valor[i]=10;
+      }
+      if(num[i]=='L'){
+        valor[i]=50;
+      }
+      if(num[i]=='C'){
+        valor[i]=100;
+      }
+      if(num[i]=='D'){
+        valor[i]=500;
+      }
+      if(num[i]=='M'){
+        valor[i]=1000;
+      }
+    }
+
+    for(int i=0; i<tamano; i++){
+      if(i==tamano-1){
+        resFinal += valor[i];
+      }
+      else{
+        if(valor[i] >= valor[i+1]){
+            resFinal += valor[i];
+        }
+        else{
+            resFinal -= valor[i];
+        }
+      }
+    }
 
 
+    Serial.print("El numero ingresado fue: ");
+    Serial.print(num);
+    Serial.print(" Que corresponde a: ");
+    Serial.print(resFinal);
+    Serial.println();
+
+  }
+}
+*/
 
 
 
