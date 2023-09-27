@@ -11,7 +11,7 @@ void Problema1();
 void Problema2();
 bool Problema3();
 int Problema4();
-void Problema5(int num, char *arreglo);
+void Problema5(int *num, char *arreglo);
 void Problema6();
 void Problema7();
 void Problema8();
@@ -49,8 +49,8 @@ int main()
         case 4:
         {
             int numero=Problema4();
-            cout<<"Ahora vamos a multiplicar ese numero por dos."<<endl;
-            cout<<"El resultado es: "<<numero*2<<endl;
+            cout<<"Ahora vamos a dividir ese numero entre dos y luego multiplicarlo por tres."<<endl;
+            cout<<"El resultado es: "<<(numero/2)*3<<endl;
 
             break;
         }
@@ -59,9 +59,9 @@ int main()
             int num=0;
             cout<<"Ingrese el numero: "<<endl;
             cin>>num;
-            char arreglo[5];
-            Problema5(num, arreglo);//Hay que ponerle un & que significa la dirección de eso
-            cout<<arreglo;
+            char arreglo[10];
+            Problema5(&num, arreglo);
+            cout<<"La cadena es: "<<arreglo<<" y su longitud es: "<<CalcularLongitud(arreglo)<<endl;
             break;
         }
         case 6:
@@ -127,7 +127,7 @@ void Problema1(){
 
 
 void Problema2(){
-    char arreglo[200];//El arreglo debe ser de 200
+    char arreglo[200];
     char cr;
     char letras;
 
@@ -186,19 +186,19 @@ int Problema4(){
     return num;
 }
 
-void Problema5(int num, char *arreglo){
+void Problema5(int *num, char *arreglo){
     int i=0;
     int k=0;
     int digitos[10];
 
-    while(num>0){
-        digitos[i] = num%10;
-        num = num/10;
+    while(*num>0){
+        digitos[i] = *num%10;
+        *num = *num/10;
         i++;
     }
 
     for(int j=i-1; j>=0; j--){
-        arreglo[k]= digitos[j] + 48;//El profe dijo que hay que ponerle siempre el *
+        arreglo[k]= digitos[j] + 48;
         k++;
     }
 }
@@ -317,6 +317,8 @@ int Potencia(int base, int exp){
 
 
 void Problema10(){
+    //Este código es diferente a la implementación en Arduino, ya que Arduino no aceptaba tipos de datos "map"
+    //Pero los dos funcionan, solo que me tocó cambiar la implementación.
     romanos['I']=1;
     romanos['V']=5;
     romanos['X']=10;
